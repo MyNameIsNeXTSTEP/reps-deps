@@ -1,3 +1,7 @@
+// This file contains the core logic for directory scanning
+// The CLI binary (bin/cli.js) is auto-generated from this file
+// Run 'npm run build' after making changes to regenerate the CLI
+
 const fs = require('fs');
 const path = require('path');
 
