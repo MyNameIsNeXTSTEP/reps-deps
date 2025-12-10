@@ -1,0 +1,23 @@
+{
+  "name": "reps-deps",
+  "version": "1.0.0",
+  "description": "Multi-repositories dependencies reader for one final list output",
+  "main": "index.js",
+  "bin": {
+    "reps-deps": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "keywords": [
+    "cli",
+    "dependencies",
+    "repositories",
+    "scanner"
+  ],
+  "author": "Gadzhiev Islam (@mynameisnextstep, gadzhievislam20@gmail.com)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
