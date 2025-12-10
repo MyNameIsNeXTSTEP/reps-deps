@@ -4,3 +4,10 @@ yarn-debug.log*
 yarn-error.log*
 .DS_Store
 *.log
+
+# Test data
+test-repos/
+
+# Generated reports
+dependencies-report.txt
+*-report.txt

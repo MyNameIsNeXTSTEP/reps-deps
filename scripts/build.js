@@ -23,26 +23,33 @@ try {
 ${indexContent}
 
 // CLI execution logic
-const targetDir = process.argv[2] || process.cwd();
-const absolutePath = path.resolve(targetDir);
+const args = process.argv.slice(2);
+const targetDir = args[0] || process.cwd();
+const outputFile = args[1] || null; // Optional output file path
 
-console.log(\`Scanning directory: \${absolutePath}\\n\`);
+console.log('🔍 Scanning for Node.js repositories...\\n');
+console.log(\`Target Directory: \${targetDir}\`);
 
 try {
-  const directories = scanDirectory(absolutePath);
+  const result = generateDependenciesReport(targetDir, outputFile);
   
-  if (directories.length === 0) {
-    console.log('No subdirectories found.');
-  } else {
-    console.log('Found subdirectories:');
-    console.log('-------------------');
-    directories.forEach(dir => {
-      console.log(\`  - \${dir}\`);
+  console.log(\`\\n✅ Found \${result.repositories.length} Node.js repositories\`);
+  console.log(\`📄 Report saved to: \${result.outputFile}\\n\`);
+  
+  // Print summary
+  if (result.repositories.length > 0) {
+    console.log('Summary:');
+    console.log('-'.repeat(60));
+    result.repositories.forEach(repo => {
+      const totalDeps = repo.dependencies.length + repo.devDependencies.length;
+      console.log(\`  \${repo.name}: \${totalDeps} total dependencies (\${repo.dependencies.length} prod, \${repo.devDependencies.length} dev)\`);
     });
-    console.log(\`\\nTotal: \${directories.length} subdirectories\`);
+    console.log('\\n💡 Check the report file for detailed information.');
+  } else {
+    console.log('No Node.js repositories found in the specified directory.');
   }
 } catch (error) {
-  console.error(\`Error: \${error.message}\`);
+  console.error(\`\\n❌ Error: \${error.message}\`);
   process.exit(1);
 }
 `;
